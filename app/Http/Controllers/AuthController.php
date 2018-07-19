@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Swagger\Annotations as SWG;
 
+/**
+ * @SWG\Swagger(
+ *   @SWG\Info(
+ *     title="Site Title",
+ *     version="1.0",
+ *     description="Site description",
+ *     @SWG\Contact(
+ *         email="xyz@xyz.com"
+ *     )
+ *   )
+ * )
+ */
 class AuthController extends Controller
 {
     /**
@@ -19,9 +31,23 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a JWT via given credentials.
+     * @SWG\Get(
+     *      path="/projects",
+     *      operationId="getProjectsList",
+     *      tags={"Projects"},
+     *      summary="Get list of projects",
+     *      description="Returns list of projects",
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @SWG\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"api_key_security_example": {}}
+     *       }
+     *     )
      *
-     * @return JsonResponse
+     * Returns list of projects
      */
     public function login(): JsonResponse
     {
