@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Events\UserRegister;
+use App\Listeners\UserEmailSenderListener;
+use App\Listeners\UserRegisterListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,8 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        UserRegister::class => [
+            UserRegisterListener::class,
+            UserEmailSenderListener::class,
         ],
     ];
 
